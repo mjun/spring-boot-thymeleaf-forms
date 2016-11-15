@@ -2,7 +2,7 @@ package hr.spring.thymeleaf.demo.web.form.field;
 
 public class FormFieldDisplayCallback {
 	
-	public static String getAccessibility(FormField field) {
+	public static String getFieldDisplay(FormField field) {
 		
 		if (field.getName().equals("Name")) {
 			return FormField.DISPLAY_NONE;

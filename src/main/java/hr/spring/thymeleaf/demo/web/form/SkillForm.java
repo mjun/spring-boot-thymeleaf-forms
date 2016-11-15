@@ -1,13 +1,12 @@
 package hr.spring.thymeleaf.demo.web.form;
 
 import hr.spring.thymeleaf.demo.web.form.field.FormField;
-import hr.spring.thymeleaf.demo.web.form.field.FormFieldDisplayCallback;
 import lombok.Data;
 
 @Data
 public class SkillForm {
 
-	private FormField skill = new FormField("Skill name");
+    private FormField skill = new FormField("Skill name");
     private FormField level = new FormField("Level");
     
     @Override
