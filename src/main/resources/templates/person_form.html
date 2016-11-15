@@ -1,0 +1,74 @@
+<html>
+    <body>
+        <form action="#" th:action="@{/}" th:object="${personForm}" method="post">
+            <table>
+                <tr>
+                    <td th:text="*{name.name}"></td>
+                    <td th:include="fields :: textField('name')"></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+                <tr>
+                    <td th:text="*{age.name}"></td>
+                    <td th:include="fields :: textField('age')"></td>
+                    <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+                </tr>
+                <tr>
+                    <td th:text="*{city.name}"></td>
+                    <td th:include="fields :: textField('city')"></td>
+                    <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</td>
+                </tr>
+            </table>
+            <div>Skills</div>
+            <table class="skills">
+                <tr th:each="skill, status : *{skills}" th:attr="data-skill-id=${status.index}">
+                	<td>
+		                <label th:text="${skill.skill.name}"></label>
+		            </td>
+		            <td th:include="fields :: textField('skills[__${status.index}__].skill')"></td>
+		            <td th:if="${#fields.hasErrors('skills[__${status.index}__].skill')}" th:errors="*{skills[__${status.index}__].skill}">Skill error</td>
+			        <td>
+		                <label th:text="${skill.level.name}"></label>
+		            </td>
+		            <td th:include="fields :: textField('skills[__${status.index}__].level')"></td>
+		            <td th:if="${#fields.hasErrors('skills[__${status.index}__].level')}" th:errors="*{skills[__${status.index}__].level}">Level Error</td>
+                </tr>
+            </table>
+            <div>
+            	<button id="add-skill">Add skill</button>
+            </div>
+            <div>
+            	<button type="submit">Submit</button>
+            </div>
+        </form>
+        
+        <script
+		  src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+		  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+		  crossorigin="anonymous"></script>
+		<script>
+		 $(document).ready(function() {
+			 $("#add-skill").click(function(e){
+				e.preventDefault();
+				
+				var nextIndex = $(".skills tr").length;
+				var skillTableRow =   '<tr data-skill-id="' + nextIndex + '">' + 
+							'			        <td>' + 
+							'			                <label>Skill name</label>' + 
+							'			        </td>' + 
+							'			        <td>' + 
+							'			                <input type="text" id="skills' + nextIndex + '.skill.value" name="skills[' + nextIndex + '].skill.value" value="" />' + 
+							'			        </td>' + 
+							'			        <td>' + 
+							'			                <label>Level</label>' + 
+							'			        </td>' + 
+							'			        <td>' + 
+							'			                <input type="text" id="skills' + nextIndex + '.level.value" name="skills[' + nextIndex + '].level.value" value="" />' + 
+							'			        </td>' + 
+							'			</tr>';
+				
+				$(".skills").append(skillTableRow);
+			 });
+		 });
+		</script>
+    </body>
+</html>

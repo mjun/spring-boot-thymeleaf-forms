@@ -1,0 +1,4 @@
+<div th:fragment="textField(field)">
+	<input th:if="*{__${field}__.display} != 'NONE'" type="text" th:field="*{__${field}__.value}" />
+</div>
+
